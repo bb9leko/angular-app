@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { TransacaoService } from '../../core/services/transacao.service';
+import { Transacao } from '../../core/services/transacao';
 
 @Component({
   selector: 'app-sobre',
@@ -7,5 +9,14 @@ import { Component } from '@angular/core';
   styleUrl: './sobre.component.scss'
 })
 export class SobreComponent {
+  listaTransacoes: Transacao[] = [];
+  
+  constructor(private service: TransacaoService) {}
 
+  ngOnInit(): void {
+    this.service.listar().subscribe((listaTransacoes) => {
+      console.log('Lista de transações:', listaTransacoes);
+      this.listaTransacoes = listaTransacoes;
+    });    
+  }
 }
