@@ -57,3 +57,19 @@ Angular CLI does not come with an end-to-end testing framework by default. You c
 ## Additional Resources
 
 For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+
+
+### Instalando Angular CLI				
+```npm install -g @angular/cli```
+
+### Iniciando Novo Projeto Angular 
+```ng new <project-name>```
+
+### Criando Componentes 
+```ng g c components/home```
+
+### Criando Serviços
+```ng g s /core/services/transacao```
+
+### Adicionando Angular Material
+``` ng add @angular/material ```
