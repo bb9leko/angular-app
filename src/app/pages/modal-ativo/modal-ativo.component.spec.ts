@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { SobreComponent } from './sobre.component';
+import { ModalAtivoComponent } from './modal-ativo.component';
 
-describe('SobreComponent', () => {
-  let component: SobreComponent;
-  let fixture: ComponentFixture<SobreComponent>;
+describe('ModalAtivoComponent', () => {
+  let component: ModalAtivoComponent;
+  let fixture: ComponentFixture<ModalAtivoComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [SobreComponent]
+      imports: [ModalAtivoComponent]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(SobreComponent);
+    fixture = TestBed.createComponent(ModalAtivoComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

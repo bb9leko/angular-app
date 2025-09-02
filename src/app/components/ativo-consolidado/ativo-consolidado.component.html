@@ -1,0 +1,18 @@
+<div class="card">
+  <!--<img
+    src="{{ ativo != undefined ? ativo : 'assets/imagens/capa-indisponivel.png'}}"
+    alt="Capa do livro"> -->
+  <div class="info-card">
+    <p class="titulo">{{ ativo.ticket }}</p>
+    <p class="informacoes">Data:</p>
+    <p class="resultado">{{ ativo.dataEvento }}</p>
+    <p class="informacoes">Valor total:</p>
+    <p class="resultado">{{ ativo.valorTotal }}</p>
+    <p class="informacoes">Valor Total Consolidado:</p>
+    <p class="resultado">{{ ativo.valorTotalConsolidado }}</p>
+    <button>Mais detalhes</button>
+  </div>
+</div>
+<div *ngIf="modalAberto">
+  <app-modal-ativo [ativo]="ativo" (mudouModal)="onModelChange($event)"></app-modal-ativo>
+</div>

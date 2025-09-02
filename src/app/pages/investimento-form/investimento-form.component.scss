@@ -16,7 +16,7 @@ mat-divider {
 
 mat-divider.full-width {
   grid-column: 1 / -1;
-  margin: 16px 0;
+  margin: 16px 0px;
 }
 
 .form-card {
@@ -55,4 +55,24 @@ mat-divider.full-width {
 
 .col-3 {
   grid-column: span 2;
+}
+
+button {
+  display: inline-block;
+    padding: 12px 24px 10px 24px;
+    margin: 10px;
+    background: var(--mat-sys-primary);
+    color: var(--mat-sys-on-primary);
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    
+
+    &:hover {
+        background: var(--mat-sys-primary-container);
+        color: var(--mat-sys-on-primary-container);
+        transform: translateY(-2px);
+        box-shadow: var(--mat-sys-elevation-3);
+    }
 }

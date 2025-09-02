@@ -1,0 +1,27 @@
+<section class="container">
+  <header>Qual ativo procura?</header>
+  <div class="busca">
+    <input
+      type="search"
+      [(ngModel)]="campoBusca"
+    >
+    <button (click)="buscarAtivos()">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M21 21L16.514 16.506L21 21ZM19 10.5C19 15.194 15.194 19 10.5 19C5.806 19 2 15.194 2 10.5C2 5.806 5.806 2 10.5 2C15.194 2 19 5.806 19 10.5Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+    </button>
+  </div>
+<div class="container-card" *ngIf="listaAtivos && listaAtivos.length > 0; else telaInicial">
+  <div *ngFor="let ativo of listaAtivos">
+    <app-ativo [ativo]="ativo"></app-ativo>
+  </div>
+</div>
+<ng-template #telaInicial>
+<!--  <div class="imagens">
+    <h1 class="titulo">Busque o ativo <br> que quiser na <br> nossa estante!</h1>
+    <img
+      class="ilustracao"
+      src="../../assets/imagens/ilustracao-estante.png"
+      alt="Ilustração de uma pessoa em pé ao lado de uma estante com livros e plantas"> 
+  </div> -->
+</ng-template>

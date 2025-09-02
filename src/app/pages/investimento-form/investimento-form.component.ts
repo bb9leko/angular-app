@@ -1,12 +1,14 @@
 import { Component } from '@angular/core';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { MatButtonModule } from '@angular/material/button';
 import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
 import {MatCardModule} from '@angular/material/card';
 import { ReactiveFormsModule } from '@angular/forms';
 import {MatDividerModule} from '@angular/material/divider';
 import { NgxMaskDirective, provideNgxMask } from 'ngx-mask';
+import { TransacaoService } from '../../core/services/transacao.service';
 
 @Component({
   selector: 'app-investimento-form',
@@ -17,7 +19,8 @@ import { NgxMaskDirective, provideNgxMask } from 'ngx-mask';
     MatCardModule, 
     ReactiveFormsModule,
     MatDividerModule,
-    NgxMaskDirective    
+    NgxMaskDirective,
+    MatButtonModule    
   ],
   providers: [provideNgxMask()],
   templateUrl: './investimento-form.component.html',
@@ -26,8 +29,8 @@ import { NgxMaskDirective, provideNgxMask } from 'ngx-mask';
 export class InvestimentoFormComponent {
   form: FormGroup;
 
-  constructor(private formBuilder: FormBuilder) {
-    this.form = this.formBuilder.group({
+  constructor(private formBuilder: FormBuilder,private transacaoService: TransacaoService) {
+      this.form = this.formBuilder.group({
       classificacaoAtivo: [null, Validators.required],
       ticket: [null, Validators.required],
       dataEvento: [null, Validators.required],
@@ -38,7 +41,7 @@ export class InvestimentoFormComponent {
       valorTaxasEmolumentos: [null, Validators.required],
       valorTaxaLiquidacao: [null, Validators.required],
       valorImpostos: [null, Validators.required],
-      outrosValoresCobrados: [null],
+      outrosValoresCobrados: [null, Validators.required],
       valorTotalComCustosEDespesas: [{ value: null, disabled: true }],
       compraOUVenda: [null, Validators.required],
       corretora: [null, Validators.required]
@@ -67,4 +70,33 @@ export class InvestimentoFormComponent {
     this.form.get('valorTotalComCustosEDespesas')!.setValue(totalFinal ? totalFinal.toFixed(2) : '', { emitEvent: false });
   }
 
+  transformarTicketParaCaixaAlta(event: any) {
+  const valor = event.target.value.toUpperCase();
+  this.form.get('ticket')?.setValue(valor, { emitEvent: false });
+  }
+
+  onClick() {
+    if (this.form.valid) {
+      console.log('Dados do formulário:', this.form.getRawValue());
+      this.transacaoService.inserirTransacao(this.form.getRawValue()).subscribe({
+        next: (res) => {
+          // sucesso, faça algo com a resposta
+          console.log('Transação enviada com sucesso!', res);
+          alert('Transação enviada com sucesso!');
+          this.form.reset(); 
+        },
+        error: (err) => {
+          // erro, trate o erro
+          console.error('Erro ao enviar transação:', err);
+          alert('Erro ao enviar transação. Por favor, tente novamente.');
+        },
+        complete: () => {
+          console.log('Formulário Completado');
+        }        
+      });
+    } else {
+      console.log('Formulário inválido');
+      alert('Por favor, preencha todos os campos obrigatórios.');
+    }
+  }
 }
