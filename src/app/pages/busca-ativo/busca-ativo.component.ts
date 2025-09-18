@@ -64,6 +64,7 @@ export class BuscaAtivoComponent implements OnDestroy {
     
     items.forEach((item: any) => {
       ativos.push( this.ativo = {
+        id: item.id,
         classificacaoAtivo: item.classificacaoAtivo?.classificacaoAtivo,
         compraOUVenda: item.compraOUVenda?.compraOUVenda,
         corretora: item.corretora?.corretora,

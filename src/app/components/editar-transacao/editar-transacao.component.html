@@ -1,0 +1,114 @@
+<mat-card class="form-card">
+    <h2 class="form-title">Formulário de Investimento</h2>
+    <mat-divider></mat-divider>
+    <form [formGroup]="form" class="form-container">
+        <!-- Data do Evento -->
+        <mat-form-field class="col-span-2" appearance="fill">
+            <mat-label>Data do Evento</mat-label>
+            <input matInput 
+                   placeholder="dd/mm/yyyy" 
+                   formControlName="dataEvento"
+                   mask="00/00/0000"
+                   [dropSpecialCharacters]="false">
+        </mat-form-field>
+
+        <!-- Corretora -->
+        <mat-form-field class="col-3" appearance="fill">
+            <mat-label>Corretora</mat-label>
+            <mat-select formControlName="corretora">
+                <mat-option value="BB Banco de Investimento S.A">BB Banco de Investimento S.A</mat-option>
+                <mat-option value="XP Investimentos">XP Investimentos</mat-option>
+                <mat-option value="Clear Corretora">Clear Corretora</mat-option>
+                <mat-option value="NuBank">NuBank</mat-option>
+                <!-- Adicione outras corretoras conforme necessário -->
+            </mat-select>
+        </mat-form-field>
+
+        <!-- Tipo Ativo -->
+        <mat-form-field class="col-span-2" appearance="fill">
+            <mat-label>Tipo Ativo</mat-label>
+            <mat-select formControlName="classificacaoAtivo">
+                <mat-option value="ACOES">Ações</mat-option>
+                <mat-option value="FIIS">FIIs</mat-option>
+                <mat-option value="ETFS">ETFs</mat-option>
+                <mat-option value="TESOURO_NACIONAL">Tesouro Nacional</mat-option>
+            </mat-select>
+        </mat-form-field>
+
+        <!-- Ticket -->
+        <mat-form-field appearance="fill">
+            <mat-label>Ticket</mat-label>
+            <input matInput placeholder="Digite o ticket" formControlName="ticket" style="text-transform: uppercase" 
+            (input)="transformarTicketParaCaixaAlta($event)">
+        </mat-form-field>
+
+        <!-- Compra ou Venda -->
+        <mat-form-field appearance="fill">
+            <mat-label>Compra ou Venda</mat-label>
+            <mat-select formControlName="compraOUVenda">
+                <mat-option value="COMPRA">Compra</mat-option>
+                <mat-option value="VENDA">Venda</mat-option>
+            </mat-select>
+        </mat-form-field>
+
+        <!-- Quantidade -->
+        <mat-form-field appearance="fill">
+            <mat-label>Quantidade</mat-label>
+            <input matInput type="number" formControlName="quantidade" step="100" min="0">
+        </mat-form-field>
+
+        <!-- Valor Unitário -->
+        <mat-form-field appearance="fill">
+            <mat-label>Valor Unitário</mat-label>
+            <input matInput placeholder="R$ 0,00" formControlName="valorUnitario" mask="separator.2" thousandSeparator="." decimalMarker=",">
+        </mat-form-field>
+
+        <!-- Valor Total -->
+        <mat-form-field appearance="fill">
+            <mat-label>Valor Total</mat-label>
+            <input matInput placeholder="R$ 0,00" formControlName="valorTotal" readonly>
+        </mat-form-field>
+
+        <mat-divider class="full-width"></mat-divider>
+
+        <!-- Valor da Corretagem -->
+        <mat-form-field appearance="fill">
+            <mat-label>Valor da Corretagem</mat-label>
+            <input matInput placeholder="R$ 0,00" formControlName="valorCorretagem" mask="separator.2" thousandSeparator="." decimalMarker=",">
+        </mat-form-field>
+
+        <!-- Valor das Taxas e Emolumentos -->
+        <mat-form-field appearance="fill">
+            <mat-label>Valor das Taxas e Emolumentos</mat-label>
+            <input matInput placeholder="R$ 0,00" formControlName="valorTaxasEmolumentos" mask="separator.2" thousandSeparator="." decimalMarker=",">
+        </mat-form-field>
+
+        <!-- Taxa de Liquidação -->
+        <mat-form-field appearance="fill">
+            <mat-label>Taxa de Liquidação</mat-label>
+            <input matInput placeholder="R$ 0,00" formControlName="valorTaxaLiquidacao" mask="separator.2" thousandSeparator="." decimalMarker=",">
+        </mat-form-field>
+
+        <!-- Valor Impostos -->
+        <mat-form-field appearance="fill">
+            <mat-label>Valor Impostos</mat-label>
+            <input matInput placeholder="R$ 0,00" formControlName="valorImpostos" mask="separator.2" thousandSeparator="." decimalMarker=",">
+        </mat-form-field>
+
+        <!-- Outros Valores -->
+        <mat-form-field appearance="fill">
+            <mat-label>Outros Valores</mat-label>
+            <input matInput placeholder="R$ 0,00" formControlName="outrosValoresCobrados" mask="separator.2" thousandSeparator="." decimalMarker=",">
+        </mat-form-field>
+
+        <!-- Valor Total com Custos e Despesas -->
+        <mat-form-field appearance="fill">
+            <mat-label>Valor Total com Custos e Despesas</mat-label>
+            <input matInput placeholder="R$ 0,00" formControlName="valorTotalComCustosEDespesas" readonly>
+        </mat-form-field>
+        <p>{{form.get('ticket')?.value}}</p>
+  
+        <mat-divider class="full-width"></mat-divider>
+        <button matButton="filled" (click)="onClick()">Enviar</button>
+    </form>
+</mat-card>

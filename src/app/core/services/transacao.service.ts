@@ -20,7 +20,7 @@ export class TransacaoService {
     return this.http.get<Transacao[]>(`${this.apiUrl}/transacao/listaTransacoes`);
   }
 
-   inserirTransacao(transacao: Transacao): Observable<Transacao> {
+  inserirTransacao(transacao: Transacao): Observable<Transacao> {
     return this.http.post<Transacao>(`${this.apiUrl}/transacao/insereTransacao`, transacao);
   }
 
@@ -39,6 +39,22 @@ export class TransacaoService {
       // Remova o map(resultado => resultado.items)
       tap(resultado => console.log('Fluxo após o map', resultado))
     );
+  }
+
+  editarTransacao(transacao: Transacao): Observable<Transacao> {
+    const url = `${this.apiUrl}/transacao/editarTransacao/${transacao.id}`;
+    return this.http.put<Transacao>(url, transacao);
+  }
+  
+
+  excluirTransacao(id: number): Observable<Transacao> {
+    const url = `${this.apiUrl}/transacao/excluirTransacao/${id}`;
+    return this.http.delete<Transacao>(url);
+  }
+
+  buscarPorId(id: number): Observable<Transacao> {
+    const url = `${this.apiUrl}/transacao/buscarTransacaoPorId/${id}`;
+    return this.http.get<Transacao>(url);
   }
 
 }

@@ -1,0 +1,78 @@
+.form-title {
+  text-align: left;
+  font-size: 24px;
+  margin: 16px 0;
+  color: var(--mat-sys-on-surface, #000);
+  padding-left: 60px;
+  padding-top: 16px; 
+}
+
+mat-divider {
+  border-top-color: var(--mat-sys-primary, #1976d2); // ou qualquer cor desejada
+  opacity: 0.25;
+  margin: 0 48px 16px 48px; // margem esquerda e direita, e espaço abaixo
+  border-top-color: #000;
+}
+
+mat-divider.full-width {
+  grid-column: 1 / -1;
+  margin: 16px 0px;
+}
+
+.form-card {
+  margin: 32px auto;
+  max-width: 800px;
+  border-radius: 16px;
+  box-shadow: 0 2px 12px 0 rgba(0,0,0,0.09);
+  background: var(--mat-sys-surface-container, #fff);
+  padding: 0 0 16px 0;
+}
+
+.form-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr; 
+  gap: 18px 24px;
+  max-width: 700px;
+  margin: 0 auto;
+  padding: 24px 16px 0 16px;
+  background: transparent;
+}
+
+@media (max-width: 700px) {
+  .form-card, .form-container {
+    max-width: 98vw;
+    padding: 8px 2vw;
+  }
+  .form-container {
+    grid-template-columns: 1fr;
+    gap: 14px;
+  }
+}
+
+.col-span-2 {
+  grid-column: span 1;
+}
+
+.col-3 {
+  grid-column: span 2;
+}
+
+button {
+  display: inline-block;
+    padding: 12px 24px 10px 24px;
+    margin: 10px;
+    background: var(--mat-sys-primary);
+    color: var(--mat-sys-on-primary);
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    
+
+    &:hover {
+        background: var(--mat-sys-primary-container);
+        color: var(--mat-sys-on-primary-container);
+        transform: translateY(-2px);
+        box-shadow: var(--mat-sys-elevation-3);
+    }
+}

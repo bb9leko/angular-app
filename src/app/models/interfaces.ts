@@ -1,4 +1,5 @@
 export interface Ativo { 
+    id: number,
     classificacaoAtivo: string;
     compraOUVenda: string;
     corretora: string;

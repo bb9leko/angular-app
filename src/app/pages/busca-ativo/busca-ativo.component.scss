@@ -16,7 +16,7 @@ section {
 }
 
 header {
-  color: #6C63FF;
+  color: var(--mat-sys-on-primary-container);
   font-style: normal;
   font-weight: 600;
   font-size: 24px;
@@ -30,7 +30,7 @@ header {
 section input {
   width: 588px;
   height: 56px;
-  border: 2px solid #6C63FF;
+  border: 2px solid var(--mat-sys-on-primary-container);
   border-radius: 10px;
   outline: 0;
   box-sizing: border-box;
@@ -52,7 +52,7 @@ section p {
   font-weight: 400;
   font-size: 16px;
   line-height: 24px;
-  color: #8B8B8B;
+  color: var(--mat-sys-on-primary-container);
 }
 
 .resultados {
@@ -68,7 +68,7 @@ section p {
 }
 
 .mensagem-erro {
-  color: #6C63FF;
+  color: var(--mat-sys-on-primary-container);
 }
 
 input[type='search']:focus {
@@ -130,5 +130,5 @@ section button {
 }
 
 button svg {
-  color: #6C63FF; /* ou qualquer cor desejada */
+  color: var(--mat-sys-on-primary-container); /* ou qualquer cor desejada */
 }

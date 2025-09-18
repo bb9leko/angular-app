@@ -9,6 +9,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import {MatDividerModule} from '@angular/material/divider';
 import { NgxMaskDirective, provideNgxMask } from 'ngx-mask';
 import { TransacaoService } from '../../core/services/transacao.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-investimento-form',
