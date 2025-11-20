@@ -1,0 +1,235 @@
+// src/app/pages/upload-dividendos/upload-dividendos.component.scss
+.form-card {
+  max-width: 900px;
+  margin: 20px auto;
+  padding: 24px;
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(25, 118, 210, 0.10);
+}
+
+.form-title {
+  font-size: 24px;
+  font-weight: 600;
+  color: #1976d2;
+  margin-bottom: 16px;
+  font-family: 'Roboto', 'Poppins', Arial, sans-serif;
+}
+
+.form-container {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  margin-top: 24px;
+}
+
+.upload-section {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.drop-area {
+  border: 2px dashed #90caf9;
+  border-radius: 12px;
+  padding: 40px 20px;
+  text-align: center;
+  background: #e3f2fd;
+  transition: all 0.3s ease;
+  cursor: pointer;
+  min-height: 200px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  &:hover:not(.uploading) {
+    border-color: #1976d2;
+    background: #bbdefb;
+  }
+
+  &.has-file {
+    border-color: #4caf50;
+    background: #e8f5e8;
+    cursor: default;
+  }
+
+  &.uploading {
+    border-color: #ff9800;
+    background: #fff3e0;
+    cursor: not-allowed;
+  }
+}
+
+.upload-icon {
+  font-size: 48px;
+  color: #1976d2;
+  margin-bottom: 16px;
+}
+
+.drop-text {
+  .primary-text {
+    font-size: 18px;
+    font-weight: 500;
+    color: #1565c0;
+    margin-bottom: 8px;
+  }
+
+  .secondary-text {
+    font-size: 14px;
+    color: #666;
+    margin-bottom: 16px;
+  }
+}
+
+.file-info {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+
+  .file-icon {
+    font-size: 48px;
+    color: #4caf50; // Verde para CSV
+  }
+
+  .file-details {
+    text-align: left;
+
+    .file-name {
+      font-size: 16px;
+      font-weight: 500;
+      color: #333;
+      margin-bottom: 4px;
+    }
+
+    .file-size {
+      font-size: 12px;
+      color: #666;
+      margin: 0;
+    }
+  }
+
+  .remove-btn {
+    color: #f44336;
+  }
+}
+
+.progress-section {
+  .upload-progress {
+    height: 8px;
+    border-radius: 4px;
+    margin-bottom: 8px;
+  }
+
+  .progress-text {
+    text-align: center;
+    font-size: 14px;
+    color: #666;
+    margin: 0;
+  }
+}
+
+.action-buttons {
+  display: flex;
+  gap: 16px;
+  justify-content: center;
+
+  button {
+    min-width: 140px;
+    height: 44px;
+    font-weight: 600;
+    
+    mat-icon {
+      margin-right: 8px;
+    }
+  }
+}
+
+.full-width {
+  width: 100%;
+  margin: 16px 0;
+}
+
+.info-section {
+  background: #f5f5f5;
+  padding: 20px;
+  border-radius: 8px;
+  border-left: 4px solid #1976d2;
+
+  h3 {
+    color: #1976d2;
+    margin-bottom: 16px;
+    font-size: 16px;
+    font-weight: 600;
+  }
+
+  .format-info {
+    .format-example {
+      margin: 12px 0;
+      
+      p {
+        margin-bottom: 4px;
+        font-weight: 500;
+        color: #333;
+      }
+
+      code {
+        background: #e0e0e0;
+        padding: 8px 12px;
+        border-radius: 4px;
+        font-family: 'Courier New', monospace;
+        font-size: 12px;
+        display: block;
+        color: #d32f2f;
+      }
+    }
+
+    .format-rules {
+      margin: 16px 0 0 0;
+      padding-left: 20px;
+
+      li {
+        margin-bottom: 8px;
+        color: #666;
+        font-size: 14px;
+      }
+    }
+  }
+}
+
+// Estilos para snackbar
+::ng-deep .snack-success {
+  background-color: #4caf50 !important;
+}
+
+::ng-deep .snack-error {
+  background-color: #f44336 !important;
+}
+
+// Responsividade
+@media (max-width: 768px) {
+  .form-card {
+    margin: 10px;
+    padding: 16px;
+  }
+
+  .drop-area {
+    padding: 20px 10px;
+    min-height: 150px;
+  }
+
+  .upload-icon {
+    font-size: 36px;
+  }
+
+  .action-buttons {
+    flex-direction: column;
+    align-items: center;
+
+    button {
+      width: 100%;
+      max-width: 300px;
+    }
+  }
+}

@@ -31,3 +31,13 @@ export interface AtivoConsolidado extends Ativo {
   precoMedio: number;
   numeroTransacoes: number;
 }
+
+export interface Dividendos {
+  id?: number;
+  produto: string;
+  pagamento: string; 
+  tipoEvento: string;
+  quantidade: number;
+  precoUnitario: number;
+  valorLiquido: number;
+}

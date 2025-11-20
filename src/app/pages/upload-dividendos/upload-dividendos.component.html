@@ -1,0 +1,112 @@
+<!-- src/app/pages/upload-dividendos/upload-dividendos.component.html -->
+<mat-card class="form-card">
+  <h2 class="form-title">Upload de Dividendos</h2>
+  <mat-divider></mat-divider>
+
+  <div class="form-container">
+    
+    <!-- Área de Upload -->
+    <div class="upload-section">
+      
+      <!-- Área de Drop -->
+      <div 
+        class="drop-area" 
+        [class.has-file]="arquivoSelecionado"
+        [class.uploading]="uploading"
+        (dragover)="onDragOver($event)"
+        (dragleave)="onDragLeave($event)"
+        (drop)="onDrop($event)">
+        
+        <mat-icon class="upload-icon">cloud_upload</mat-icon>
+        
+        <div *ngIf="!arquivoSelecionado" class="drop-text">
+          <p class="primary-text">Arraste e solte seu arquivo CSV aqui</p>
+          <p class="secondary-text">ou clique para selecionar</p>
+          <button mat-raised-button color="primary" (click)="fileInput.click()" [disabled]="uploading">
+            <mat-icon>folder_open</mat-icon>
+            Selecionar Arquivo CSV
+          </button>
+        </div>
+
+        <div *ngIf="arquivoSelecionado" class="file-info">
+          <mat-icon class="file-icon">description</mat-icon>
+          <div class="file-details">
+            <p class="file-name">{{ nomeArquivo }}</p>
+            <p class="file-size">{{ (arquivoSelecionado.size / 1024).toFixed(2) }} KB</p>
+          </div>
+          <button mat-icon-button (click)="limparArquivo()" class="remove-btn" [disabled]="uploading">
+            <mat-icon>close</mat-icon>
+          </button>
+        </div>
+      </div>
+
+      <!-- Input File (oculto) -->
+      <input 
+        #fileInput 
+        id="fileInput"
+        type="file" 
+        accept=".csv"
+        (change)="onFileSelected($event)"
+        style="display: none;">
+
+      <!-- Barra de Progresso -->
+      <div *ngIf="uploading" class="progress-section">
+        <mat-progress-bar 
+          mode="determinate" 
+          [value]="uploadProgress"
+          class="upload-progress">
+        </mat-progress-bar>
+        <p class="progress-text">Processando CSV... {{ uploadProgress }}%</p>
+      </div>
+    </div>
+
+    <mat-divider class="full-width"></mat-divider>
+
+    <!-- Botões de Ação -->
+    <div class="action-buttons">
+      <button 
+        mat-raised-button 
+        color="primary" 
+        [disabled]="!arquivoSelecionado || uploading"
+        (click)="uploadArquivo()">
+        <mat-icon>upload</mat-icon>
+        {{ uploading ? 'Processando...' : 'Processar CSV' }}
+      </button>
+
+      <button 
+        mat-stroked-button 
+        color="warn" 
+        [disabled]="uploading"
+        (click)="limparArquivo()">
+        <mat-icon>clear</mat-icon>
+        Limpar
+      </button>
+    </div>
+
+    <mat-divider class="full-width"></mat-divider>
+
+    <!-- Informações sobre o formato -->
+    <div class="info-section">
+      <h3>Formato do arquivo CSV:</h3>
+      <div class="format-info">
+        <p><strong>Estrutura esperada:</strong> Cada linha deve conter os dados separados por ponto e vírgula (;)</p>
+        <div class="format-example">
+          <p><strong>Cabeçalho (primeira linha):</strong></p>
+          <code>Produto;Data;TipoEvento;Quantidade;PreçoUnitário;ValorLíquido</code>
+        </div>
+        <div class="format-example">
+          <p><strong>Exemplo de dados:</strong></p>
+          <code>PETR4;15/03/2024;DIVIDENDO;100;0,50;50,00</code>
+        </div>
+        <ul class="format-rules">
+          <li>Arquivo deve ter extensão .csv</li>
+          <li>Separador: ponto e vírgula (;)</li>
+          <li>Data no formato: dd/MM/yyyy</li>
+          <li>Valores monetários com vírgula como separador decimal</li>
+          <li>Quantidade deve ser um número inteiro</li>
+          <li>Linhas com menos de 6 campos serão ignoradas</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</mat-card>

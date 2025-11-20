@@ -6,10 +6,12 @@
     <p class="titulo">{{ ativo.ticket }}</p>
     <p class="informacoes">Data:</p>
     <p class="resultado">{{ ativo.dataEvento }}</p>
+    <p class="informacoes">Corretora:</p>
+    <p class="resultado">{{ ativo.corretora }}</p>
+    <p class="informacoes">Valor unitário:</p>
+    <p class="resultado">{{ ativo.valorUnitario }}</p>
     <p class="informacoes">Valor total:</p>
     <p class="resultado">{{ ativo.valorTotal }}</p>
-    <p class="informacoes">Corretora:</p>
-    <p class="resultado">{{ ativo.valorUnitario }}</p>
     <button class="botao-editar" aria-label="Editar" [routerLink]="['/editar-transacao', ativo.id]">
       <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
         <path d="M4 20h4.586a1 1 0 0 0 .707-.293l10.414-10.414a2 2 0 0 0 0-2.828l-2.172-2.172a2 2 0 0 0-2.828 0L4.293 14.707A1 1 0 0 0 4 15.414V20z" stroke="#6C63FF" stroke-width="2" fill="none"/>
@@ -24,10 +26,8 @@
         <path d="M8 7V5a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2" stroke="#FF4B4B" stroke-width="2"/>
       </svg>
     </button>
-  </div>
-  
+  </div>  
 </div>
-
 <div *ngIf="modalAberto">
   <app-modal-ativo [ativo]="ativo" (mudouModal)="onModelChange($event)"></app-modal-ativo>
 </div>

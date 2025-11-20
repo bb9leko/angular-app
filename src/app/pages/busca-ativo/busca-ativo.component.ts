@@ -23,8 +23,6 @@ export class BuscaAtivoComponent implements OnDestroy {
   ativo!: Ativo
 
   constructor(private service: TransacaoService) {}
-
-
   
   //ngOnInit(): void {
   //  this.service.listar().subscribe((listaTransacoes) => {
@@ -56,8 +54,7 @@ export class BuscaAtivoComponent implements OnDestroy {
         alert('Erro ao buscar ativos. Tente novamente...');
       }
     });
-  }
-  
+  }  
 
   ativosResultadoParaAtivos(items: any): Ativo[] {
     const ativos: Ativo[] = []
