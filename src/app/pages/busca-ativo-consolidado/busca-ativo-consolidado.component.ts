@@ -21,12 +21,18 @@ export class BuscaAtivoConsolidadoComponent implements OnDestroy{
   campoBusca: string = ''
   subscription!: Subscription
   ativo!: AtivoConsolidado
+  loading: boolean = false
 
   constructor(private service: TransacaoService) {}
 
-  buscarAtivosConsolidado() {
-  this.subscription = this.service.buscarAtivos(this.campoBusca).pipe(
-    map(transacoes => this.consolidarAtivosPorTicket(transacoes)),
+  ngOnInit(): void {
+    this.carregarTodosAtivos();
+  }
+
+  carregarTodosAtivos() {
+    this.loading = true;
+
+  this.subscription = this.service.buscarAtivosConsolidado().pipe(
     map(ativosConsolidados => ativosConsolidados.filter(ativo => ativo.quantidadeTotal > 0))
   ).subscribe({
     next: (ativosConsolidados) => {
@@ -44,38 +50,6 @@ export class BuscaAtivoConsolidadoComponent implements OnDestroy{
     }
   });
 }
-
-private consolidarAtivosPorTicket(transacoes: Ativo[]): AtivoConsolidado[] {
-  // Agrupa transações por ticket
-  const agrupadas = transacoes.reduce((acc, transacao) => {
-    const key = transacao.ticket;
-    
-    if (!acc[key]) {
-      acc[key] = {
-        ...transacao,
-        quantidadeTotal: 0,
-        valorTotalConsolidado: 0,
-        numeroTransacoes: 0,
-        precoMedio: 0
-      };
-    }
-    
-    // Consolida os valores
-    acc[key].quantidadeTotal += transacao.quantidade || 0;
-    acc[key].valorTotalConsolidado += transacao.valorTotal || 0;
-    acc[key].numeroTransacoes++;
-    
-    return acc;
-  }, {} as { [key: string]: AtivoConsolidado });
-
-  // Calcula preço médio e retorna array
-  return Object.values(agrupadas).map(ativo => ({
-    ...ativo,
-    precoMedio: ativo.quantidadeTotal > 0 ? 
-      ativo.valorTotalConsolidado / ativo.quantidadeTotal : 0
-    }));
-  }
-  
 
   ngOnDestroy() {
     if (this.subscription) {

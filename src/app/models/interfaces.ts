@@ -25,11 +25,24 @@ export interface AtivosResultado {
     totalItems: number
 }
 
-export interface AtivoConsolidado extends Ativo {
+/*export interface AtivoConsolidado extends Ativo {
   quantidadeTotal: number;
   valorTotalConsolidado: number;
   precoMedio: number;
   numeroTransacoes: number;
+}*/
+
+export interface AtivoConsolidado {
+  classificacaoAtivo: string;
+  corretora: string;
+  quantidadeTotal: number;
+  ticket: string;
+  valorMedio: number;
+  valorTotalCompras: number;
+}
+
+export interface RespostaAtivosFlexivel {
+  [categoria: string]: AtivoConsolidado[];
 }
 
 export interface Dividendos {
@@ -41,3 +54,4 @@ export interface Dividendos {
   precoUnitario: number;
   valorLiquido: number;
 }
+

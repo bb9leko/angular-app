@@ -3,7 +3,7 @@ import { map, Observable, tap } from 'rxjs';
 import { Transacao } from '../services/transacao';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { environment } from '../../../environments/environment';
-import { AtivosResultado, Item, Ativo } from '../../models/interfaces'
+import { Ativo, AtivoConsolidado } from '../../models/interfaces'
 
 @Injectable({
   providedIn: 'root'
@@ -14,29 +14,28 @@ export class TransacaoService {
 
   private apiUrl: string = environment.apiUrl;
   private apiUrlTransacoes: string = environment.apiUrlTransacoes;
-  //private readonly apiUrl = 'http://localhost:8081/transacao/listaTransacoes';
+  private apiUrlTransacoesConsolidado: string = environment.apiUrlTransacoesConsolidado;
   
   listar(): Observable<Transacao[]> { 
-    return this.http.get<Transacao[]>(`${this.apiUrl}/transacao/listaTransacoes`);
+    return this.http.get<Transacao[]>(`${this.apiUrl}/listar/transacoes`);
   }
 
   inserirTransacao(transacao: Transacao): Observable<Transacao> {
     return this.http.post<Transacao>(`${this.apiUrl}/transacao/insereTransacao`, transacao);
   }
 
-  //buscar(valorDigitado: string): Observable<Item[]> {
-  //  const params = new HttpParams().append('q', valorDigitado)
-  //  return this.http.get<AtivosResultado>(this.apiUrlTransacoes, { params }).pipe(
-  //    tap(retornoAPI => console.log('Fluxo do tap', retornoAPI)),
-  //    map(resultado => resultado.items),
-  //    tap(resultado => console.log('Fluxo após o map', resultado))
-  //  )
-  //}
   buscarAtivos(valorDigitado: string): Observable<Ativo[]> {
     const params = new HttpParams().append('q', valorDigitado);
     return this.http.get<Ativo[]>(this.apiUrlTransacoes, { params }).pipe(
       tap(retornoAPI => console.log('Fluxo do tap', retornoAPI)),
-      // Remova o map(resultado => resultado.items)
+      tap(resultado => console.log('Fluxo após o map', resultado))
+    );
+  }
+
+  buscarAtivosConsolidado(): Observable<AtivoConsolidado[]> {
+     return this.http.get<AtivoConsolidado[]>(this.apiUrlTransacoesConsolidado).pipe(
+      tap(retornoAPI => console.log('Fluxo do tap', retornoAPI)),
+      map(response => response || []),
       tap(resultado => console.log('Fluxo após o map', resultado))
     );
   }
@@ -44,8 +43,7 @@ export class TransacaoService {
   editarTransacao(transacao: Transacao): Observable<Transacao> {
     const url = `${this.apiUrl}/transacao/editarTransacao/${transacao.id}`;
     return this.http.put<Transacao>(url, transacao);
-  }
-  
+  }  
 
   excluirTransacao(id: number): Observable<Transacao> {
     const url = `${this.apiUrl}/transacao/excluirTransacao/${id}`;

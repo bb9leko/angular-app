@@ -12,7 +12,7 @@ import { RouterLink } from '@angular/router';
 })
 export class AtivoComponent {
 
-  @Input() ativo!: Ativo | AtivoConsolidado;
+  @Input() ativo!: Ativo ;
   modalAberto: boolean = false;
 
   onModelChange(evento: boolean) {

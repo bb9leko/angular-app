@@ -22,7 +22,7 @@
   font-weight: 600;
   font-size: 20px;
   line-height: 30px;
-  color: #6C63FF;
+  color: var(--mat-sys-on-primary-container);
   padding-top: 16px;
 }
 
@@ -47,7 +47,7 @@
 }
 
 .detalhes {
-  background: #6C63FF;
+  background: var(--mat-sys-on-primary-container);
   width: 9rem;
   height: 2.5rem;
   border-radius: 8px;

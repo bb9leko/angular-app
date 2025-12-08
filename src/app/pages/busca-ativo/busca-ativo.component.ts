@@ -16,29 +16,22 @@ import { CommonModule } from '@angular/common';
 })
 export class BuscaAtivoComponent implements OnDestroy {
 
-  listaAtivos!: Ativo[];
-  listaTransacoes: Transacao[] = [];
+  listaAtivos!: Ativo[]
+  listaTransacoes: Transacao[] = []
   campoBusca: string = ''
   subscription!: Subscription
   ativo!: Ativo
 
+
   constructor(private service: TransacaoService) {}
   
-  //ngOnInit(): void {
-  //  this.service.listar().subscribe((listaTransacoes) => {
-  //    console.log('Lista de transações:', listaTransacoes);
-  //    this.listaTransacoes = listaTransacoes;
-  //  });    
-  //}
-
-  //buscarAtivos() {
-  //  this.subscription = this.service.buscar(this.campoBusca).subscribe({
-  //    next: (items) => {
-  //      this.listaAtivos = this.ativosResultadoParaAtivos(items)
-  //    },
-  //    error: erro => console.error(erro),
-  //  });
-  // }
+  //Não está sendo usado, apenas carrega o endpoint no console 
+  ngOnInit(): void {
+    this.service.listar().subscribe((listaTransacoes) => {
+      console.log('Lista de transações:', listaTransacoes);
+      this.listaTransacoes = listaTransacoes;
+    });
+  }
 
   buscarAtivos() {
     this.subscription = this.service.buscarAtivos(this.campoBusca).subscribe({
@@ -55,31 +48,6 @@ export class BuscaAtivoComponent implements OnDestroy {
       }
     });
   }  
-
-  ativosResultadoParaAtivos(items: any): Ativo[] {
-    const ativos: Ativo[] = []
-    
-    items.forEach((item: any) => {
-      ativos.push( this.ativo = {
-        id: item.id,
-        classificacaoAtivo: item.classificacaoAtivo?.classificacaoAtivo,
-        compraOUVenda: item.compraOUVenda?.compraOUVenda,
-        corretora: item.corretora?.corretora,
-        dataEvento: item.dataEvento?.dataEvento,
-        outrosValoresCobrados: item.outrosValoresCobrados?.outrosValoresCobrados,
-        quantidade: item.quantidade?.quantidade,
-        ticket: item.ticket?.ticket,        
-        valorCorretagem: item.valorCorretagem?.valorCorretagem,
-        valorImpostos: item.valorImpostos?.valorImpostos,
-        valorTaxaLiquidacao: item.valorTaxaLiquidacao?.valorTaxaLiquidacao,
-        valorTaxasEmolumentos: item.valorTaxasEmolumentos?.valorTaxasEmolumentos,
-        valorTotal: item.valorTotal?.valorTotal,
-        valorTotalComCustosEDespesas: item.valorTotalComCustosEDespesas?.valorTotalComCustosEDespesas,
-        valorUnitario: item.valorUnitario?.valorUnitario
-      })
-    })
-    return ativos
-  } 
 
   ngOnDestroy() {
     if (this.subscription) {
