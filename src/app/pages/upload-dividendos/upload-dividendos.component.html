@@ -1,12 +1,18 @@
-<!-- src/app/pages/upload-dividendos/upload-dividendos.component.html -->
-<mat-card class="form-card">
-  <h2 class="form-title">Upload de Dividendos</h2>
-  <mat-divider></mat-divider>
+<!-- Hero Section -->
+<div class="upload-hero-section">
+  <div class="hero-content">
+    <h1 class="hero-title">Upload de Dividendos</h1>
+    <p class="hero-subtitle">Faça upload do seu arquivo CSV de dividendos de forma simples e rápida</p>
+  </div>
+</div>
 
-  <div class="form-container">
+<!-- Upload Section -->
+<div class="upload-section">
+  <div class="upload-card">
+    <div class="upload-container">
     
     <!-- Área de Upload -->
-    <div class="upload-section">
+    <div class="upload-area">
       
       <!-- Área de Drop -->
       <div 
@@ -22,7 +28,11 @@
         <div *ngIf="!arquivoSelecionado" class="drop-text">
           <p class="primary-text">Arraste e solte seu arquivo CSV aqui</p>
           <p class="secondary-text">ou clique para selecionar</p>
-          <button mat-raised-button color="primary" (click)="fileInput.click()" [disabled]="uploading">
+          <button 
+            type="button"
+            class="btn-primary"
+            (click)="fileInput.click()" 
+            [disabled]="uploading">
             <mat-icon>folder_open</mat-icon>
             Selecionar Arquivo CSV
           </button>
@@ -65,8 +75,8 @@
     <!-- Botões de Ação -->
     <div class="action-buttons">
       <button 
-        mat-raised-button 
-        color="primary" 
+        type="button"
+        class="btn-primary"
         [disabled]="!arquivoSelecionado || uploading"
         (click)="uploadArquivo()">
         <mat-icon>upload</mat-icon>
@@ -74,8 +84,8 @@
       </button>
 
       <button 
-        mat-stroked-button 
-        color="warn" 
+        type="button"
+        class="btn-secondary"
         [disabled]="uploading"
         (click)="limparArquivo()">
         <mat-icon>clear</mat-icon>
@@ -108,5 +118,7 @@
         </ul>
       </div>
     </div>
+    
+    </div>
   </div>
-</mat-card>
+</div>

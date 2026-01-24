@@ -1,117 +1,191 @@
-<mat-card class="form-card">
-    <h2 class="form-title">Formulário de Investimento</h2>
-    <mat-divider></mat-divider>
-    <form [formGroup]="form" class="form-container">
-        <!-- Data do Evento -->
-        <mat-form-field class="col-span-2" appearance="fill">
-            <mat-label>Data do Evento</mat-label>
-            <input matInput 
-                   placeholder="dd/mm/yyyy" 
-                   formControlName="dataEvento"
-                   mask="00/00/0000"
-                   [dropSpecialCharacters]="false">
-        </mat-form-field>
+<div class="form-page-container">
+  <!-- Hero Section -->
+  <section class="form-hero-section">
+    <div class="hero-content">
+      <h1 class="hero-title">
+        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" class="hero-icon">
+          <rect x="3" y="3" width="18" height="18" rx="2" stroke="currentColor" stroke-width="2"/>
+          <path d="M9 12h6" stroke="currentColor" stroke-width="2"/>
+          <path d="M12 9v6" stroke="currentColor" stroke-width="2"/>
+        </svg>
+        Nova Transação
+      </h1>
+      <p class="hero-subtitle">Registre suas compras e vendas de ativos de forma rápida e organizada</p>
+    </div>
+  </section>
 
-        <!-- Corretora -->
-        <mat-form-field class="col-3" appearance="fill">
-            <mat-label>Corretora</mat-label>
-            <mat-select formControlName="corretora">
+  <!-- Form Section -->
+  <section class="form-section">
+    <div class="form-card">
+      <form [formGroup]="form" class="modern-form">
+        <!-- Informações Básicas -->
+        <div class="form-group">
+          <h3 class="section-title">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+              <circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="2"/>
+              <polyline points="12,6 12,12 16,14" stroke="currentColor" stroke-width="2"/>
+            </svg>
+            Informações Básicas
+          </h3>
+          <div class="fields-grid basic-info">
+            <mat-form-field class="field-full" appearance="outline">
+              <mat-label>Data do Evento</mat-label>
+              <input matInput 
+                     placeholder="dd/mm/yyyy" 
+                     formControlName="dataEvento"
+                     mask="00/00/0000"
+                     [dropSpecialCharacters]="false">
+              <mat-icon matSuffix>event</mat-icon>
+            </mat-form-field>
+
+            <mat-form-field class="field-full" appearance="outline">
+              <mat-label>Corretora</mat-label>
+              <mat-select formControlName="corretora">
                 <mat-option value="BB Banco de Investimento S.A">BB Banco de Investimento S.A</mat-option>
                 <mat-option value="XP Investimentos">XP Investimentos</mat-option>
                 <mat-option value="Clear Corretora">Clear Corretora</mat-option>
                 <mat-option value="NuBank">NuBank</mat-option>
                 <mat-option value="Banco Inter">Banco Inter</mat-option>
                 <mat-option value="MercadoBitcoin">MercadoBitcoin</mat-option>
-                <!-- Adicione outras corretoras conforme necessário -->
-            </mat-select>
-        </mat-form-field>
+              </mat-select>
+              <mat-icon matSuffix>business</mat-icon>
+            </mat-form-field>
 
-        <!-- Tipo Ativo -->
-        <mat-form-field class="col-span-2" appearance="fill">
-            <mat-label>Tipo Ativo</mat-label>
-            <mat-select formControlName="classificacaoAtivo">
+            <mat-form-field appearance="outline">
+              <mat-label>Tipo de Ativo</mat-label>
+              <mat-select formControlName="classificacaoAtivo">
                 <mat-option value="ACOES">Ações</mat-option>
                 <mat-option value="FIIS">Fundos Imobiliários</mat-option>
                 <mat-option value="ETFS">ETFs</mat-option>
                 <mat-option value="ETFS_INTERNACIONAIS">ETFs Internacionais</mat-option>
                 <mat-option value="STOCKS">Stocks</mat-option>
-            </mat-select>
-        </mat-form-field>
+              </mat-select>
+              <mat-icon matSuffix>category</mat-icon>
+            </mat-form-field>
 
-        <!-- Ticket -->
-        <mat-form-field appearance="fill">
-            <mat-label>Ticket</mat-label>
-            <input matInput placeholder="Digite o ticket" formControlName="ticket" style="text-transform: uppercase" 
-            (input)="transformarTicketParaCaixaAlta($event)">
-        </mat-form-field>
+            <mat-form-field appearance="outline">
+              <mat-label>Ticket</mat-label>
+              <input matInput placeholder="Ex: PETR4" formControlName="ticket" 
+                     style="text-transform: uppercase" 
+                     (input)="transformarTicketParaCaixaAlta($event)">
+              <mat-icon matSuffix>confirmation_number</mat-icon>
+            </mat-form-field>
+          </div>
+        </div>
 
-        <!-- Compra ou Venda -->
-        <mat-form-field appearance="fill">
-            <mat-label>Compra ou Venda</mat-label>
-            <mat-select formControlName="compraOUVenda">
+        <!-- Detalhes da Transação -->
+        <div class="form-group">
+          <h3 class="section-title">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+              <path d="M7 17L17 7" stroke="currentColor" stroke-width="2"/>
+              <path d="M7 7h10v10" stroke="currentColor" stroke-width="2"/>
+            </svg>
+            Detalhes da Transação
+          </h3>
+          <div class="fields-grid transaction-details">
+            <mat-form-field appearance="outline">
+              <mat-label>Operação</mat-label>
+              <mat-select formControlName="compraOUVenda">
                 <mat-option value="COMPRA">Compra</mat-option>
                 <mat-option value="VENDA">Venda</mat-option>
-            </mat-select>
-        </mat-form-field>
+                <mat-option value="BONIFICACAO">Bonificação</mat-option>
+                <mat-option value="DESDOBRAMENTO">Desdobramento</mat-option>
+                <mat-option value="CONVERSAO">Conversão</mat-option>
+              </mat-select>
+              <mat-icon matSuffix>swap_horiz</mat-icon>
+            </mat-form-field>
 
-        <!-- Quantidade -->
-        <mat-form-field appearance="fill">
-            <mat-label>Quantidade</mat-label>
-            <input matInput type="number" formControlName="quantidade" step="100" min="0">
-        </mat-form-field>
+            <mat-form-field appearance="outline">
+              <mat-label>Quantidade</mat-label>
+              <input matInput type="number" formControlName="quantidade" step="1" min="0">
+              <mat-icon matSuffix>format_list_numbered</mat-icon>
+            </mat-form-field>
 
-        <!-- Valor Unitário -->
-        <mat-form-field appearance="fill">
-            <mat-label>Valor Unitário</mat-label>
-            <input matInput placeholder="R$ 0,00" formControlName="valorUnitario" mask="separator.2" thousandSeparator="." decimalMarker=",">
-        </mat-form-field>
+            <mat-form-field appearance="outline">
+              <mat-label>Valor Unitário</mat-label>
+              <input matInput placeholder="R$ 0,00" formControlName="valorUnitario" 
+                     mask="separator.2" thousandSeparator="." decimalMarker=",">
+              <mat-icon matSuffix>attach_money</mat-icon>
+            </mat-form-field>
 
-        <!-- Valor Total -->
-        <mat-form-field appearance="fill">
-            <mat-label>Valor Total</mat-label>
-            <input matInput placeholder="R$ 0,00" formControlName="valorTotal" readonly>
-        </mat-form-field>
+            <mat-form-field appearance="outline">
+              <mat-label>Valor Total</mat-label>
+              <input matInput placeholder="R$ 0,00" formControlName="valorTotal" readonly>
+              <mat-icon matSuffix>calculate</mat-icon>
+            </mat-form-field>
+          </div>
+        </div>
 
-        <mat-divider class="full-width"></mat-divider>
+        <!-- Custos e Taxas -->
+        <div class="form-group">
+          <h3 class="section-title">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+              <rect x="2" y="3" width="20" height="14" rx="2" ry="2" stroke="currentColor" stroke-width="2"/>
+              <line x1="8" y1="21" x2="16" y2="21" stroke="currentColor" stroke-width="2"/>
+              <line x1="12" y1="17" x2="12" y2="21" stroke="currentColor" stroke-width="2"/>
+            </svg>
+            Custos e Taxas
+          </h3>
+          <div class="fields-grid costs-taxes">
+            <mat-form-field appearance="outline">
+              <mat-label>Corretagem</mat-label>
+              <input matInput placeholder="R$ 0,00" formControlName="valorCorretagem" 
+                     mask="separator.2" thousandSeparator="." decimalMarker=",">
+              <mat-icon matSuffix>receipt</mat-icon>
+            </mat-form-field>
 
-        <!-- Valor da Corretagem -->
-        <mat-form-field appearance="fill">
-            <mat-label>Valor da Corretagem</mat-label>
-            <input matInput placeholder="R$ 0,00" formControlName="valorCorretagem" mask="separator.2" thousandSeparator="." decimalMarker=",">
-        </mat-form-field>
+            <mat-form-field appearance="outline">
+              <mat-label>Taxas e Emolumentos</mat-label>
+              <input matInput placeholder="R$ 0,00" formControlName="valorTaxasEmolumentos" 
+                     mask="separator.2" thousandSeparator="." decimalMarker=",">
+              <mat-icon matSuffix>description</mat-icon>
+            </mat-form-field>
 
-        <!-- Valor das Taxas e Emolumentos -->
-        <mat-form-field appearance="fill">
-            <mat-label>Valor das Taxas e Emolumentos</mat-label>
-            <input matInput placeholder="R$ 0,00" formControlName="valorTaxasEmolumentos" mask="separator.2" thousandSeparator="." decimalMarker=",">
-        </mat-form-field>
+            <mat-form-field appearance="outline">
+              <mat-label>Taxa de Liquidação</mat-label>
+              <input matInput placeholder="R$ 0,00" formControlName="valorTaxaLiquidacao" 
+                     mask="separator.2" thousandSeparator="." decimalMarker=",">
+              <mat-icon matSuffix>account_balance</mat-icon>
+            </mat-form-field>
 
-        <!-- Taxa de Liquidação -->
-        <mat-form-field appearance="fill">
-            <mat-label>Taxa de Liquidação</mat-label>
-            <input matInput placeholder="R$ 0,00" formControlName="valorTaxaLiquidacao" mask="separator.2" thousandSeparator="." decimalMarker=",">
-        </mat-form-field>
+            <mat-form-field appearance="outline">
+              <mat-label>Impostos</mat-label>
+              <input matInput placeholder="R$ 0,00" formControlName="valorImpostos" 
+                     mask="separator.2" thousandSeparator="." decimalMarker=",">
+              <mat-icon matSuffix>gavel</mat-icon>
+            </mat-form-field>
 
-        <!-- Valor Impostos -->
-        <mat-form-field appearance="fill">
-            <mat-label>Valor Impostos</mat-label>
-            <input matInput placeholder="R$ 0,00" formControlName="valorImpostos" mask="separator.2" thousandSeparator="." decimalMarker=",">
-        </mat-form-field>
+            <mat-form-field appearance="outline">
+              <mat-label>Outros Valores</mat-label>
+              <input matInput placeholder="R$ 0,00" formControlName="outrosValoresCobrados" 
+                     mask="separator.2" thousandSeparator="." decimalMarker=",">
+              <mat-icon matSuffix>more_horiz</mat-icon>
+            </mat-form-field>
 
-        <!-- Outros Valores -->
-        <mat-form-field appearance="fill">
-            <mat-label>Outros Valores</mat-label>
-            <input matInput placeholder="R$ 0,00" formControlName="outrosValoresCobrados" mask="separator.2" thousandSeparator="." decimalMarker=",">
-        </mat-form-field>
+            <mat-form-field appearance="outline">
+              <mat-label>Valor Final com Custos</mat-label>
+              <input matInput placeholder="R$ 0,00" formControlName="valorTotalComCustosEDespesas" readonly>
+              <mat-icon matSuffix>calculate</mat-icon>
+            </mat-form-field>
+          </div>
+        </div>
 
-        <!-- Valor Total com Custos e Despesas -->
-        <mat-form-field appearance="fill">
-            <mat-label>Valor Total com Custos e Despesas</mat-label>
-            <input matInput placeholder="R$ 0,00" formControlName="valorTotalComCustosEDespesas" readonly>
-        </mat-form-field>
-        <p>{{form.get('ticket')?.value}}</p>
-  
-        <mat-divider class="full-width"></mat-divider>
-        <button matButton="filled" (click)="onClick()">Enviar</button>
-    </form>
-</mat-card>
+        <!-- Action Buttons -->
+        <div class="form-actions">
+          <button type="button" class="btn-secondary" routerLink="/home">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+              <path d="m15 18-6-6 6-6" stroke="currentColor" stroke-width="2"/>
+            </svg>
+            Cancelar
+          </button>
+          <button type="submit" class="btn-primary" (click)="onClick()">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+              <path d="M20 6L9 17l-5-5" stroke="currentColor" stroke-width="2"/>
+            </svg>
+            Salvar Transação
+          </button>
+        </div>
+      </form>
+    </div>
+  </section>
+</div>

@@ -1,4 +1,30 @@
 @import '@angular/material/prebuilt-themes/azure-blue.css';
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
 
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+html, body { 
+  height: 100%; 
+}
+
+body { 
+  margin: 0; 
+  font-family: 'Poppins', 'Roboto', "Helvetica Neue", sans-serif;
+  background-color: #f8fafc;
+  color: #374151;
+  line-height: 1.6;
+}
+
+// Global utilities
+.text-center {
+  text-align: center;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 1rem;
+}
+
+// Smooth scrolling
+html {
+  scroll-behavior: smooth;
+}

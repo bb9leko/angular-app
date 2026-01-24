@@ -7,12 +7,15 @@ import { MatSelectModule } from '@angular/material/select';
 import {MatCardModule} from '@angular/material/card';
 import { ReactiveFormsModule } from '@angular/forms';
 import {MatDividerModule} from '@angular/material/divider';
+import { MatIconModule } from '@angular/material/icon';
+import { RouterModule } from '@angular/router';
 import { NgxMaskDirective, provideNgxMask } from 'ngx-mask';
 import { TransacaoService } from '../../core/services/transacao.service';
 import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-investimento-form',
+  standalone: true,
   imports: [
     MatFormFieldModule, 
     MatInputModule, 
@@ -20,6 +23,8 @@ import { Router } from '@angular/router';
     MatCardModule, 
     ReactiveFormsModule,
     MatDividerModule,
+    MatIconModule,
+    RouterModule,
     NgxMaskDirective,
     MatButtonModule    
   ],
@@ -57,7 +62,7 @@ export class InvestimentoFormComponent {
     const quantidade = Number(this.form.get('quantidade')!.value) || 0;
     const valorUnitario = Number(this.form.get('valorUnitario')!.value) || 0;
     const total = quantidade * valorUnitario;
-    this.form.get('valorTotal')!.setValue(total ? total.toFixed(2) : '', { emitEvent: false });
+    this.form.get('valorTotal')!.setValue(total ? parseFloat(total.toFixed(2)) : 0, { emitEvent: false });
   }
 
   atualizarValorTotalComCustos() {
@@ -68,7 +73,7 @@ export class InvestimentoFormComponent {
     const impostos = Number(this.form.get('valorImpostos')!.value) || 0;
     const outros = Number(this.form.get('outrosValoresCobrados')!.value) || 0;
     const totalFinal = total + corretagem + taxas + liquidacao + impostos + outros;
-    this.form.get('valorTotalComCustosEDespesas')!.setValue(totalFinal ? totalFinal.toFixed(2) : '', { emitEvent: false });
+    this.form.get('valorTotalComCustosEDespesas')!.setValue(totalFinal ? parseFloat(totalFinal.toFixed(2)) : 0, { emitEvent: false });
   }
 
   transformarTicketParaCaixaAlta(event: any) {
@@ -78,8 +83,23 @@ export class InvestimentoFormComponent {
 
   onClick() {
     if (this.form.valid) {
-      console.log('Dados do formulário:', this.form.getRawValue());
-      this.transacaoService.inserirTransacao(this.form.getRawValue()).subscribe({
+      const formData = this.form.getRawValue();
+      
+      // Garantir que valores monetários sejam números, não strings
+      const dadosParaEnvio = {
+        ...formData,
+        valorTotal: Number(formData.valorTotal) || 0,
+        valorTotalComCustosEDespesas: Number(formData.valorTotalComCustosEDespesas) || 0,
+        valorUnitario: Number(formData.valorUnitario) || 0,
+        valorCorretagem: Number(formData.valorCorretagem) || 0,
+        valorTaxasEmolumentos: Number(formData.valorTaxasEmolumentos) || 0,
+        valorTaxaLiquidacao: Number(formData.valorTaxaLiquidacao) || 0,
+        valorImpostos: Number(formData.valorImpostos) || 0,
+        outrosValoresCobrados: Number(formData.outrosValoresCobrados) || 0
+      };
+      
+      console.log('Dados do formulário:', dadosParaEnvio);
+      this.transacaoService.inserirTransacao(dadosParaEnvio).subscribe({
         next: (res) => {
           // sucesso, faça algo com a resposta
           console.log('Transação enviada com sucesso!', res);

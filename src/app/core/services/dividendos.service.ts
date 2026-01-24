@@ -8,7 +8,7 @@ import { Dividendos } from '../../models/interfaces'
   providedIn: 'root'
 })
 export class DividendosService {
-  private apiUrl = `${environment.apiUrl}/api/dividendos`;
+  private apiUrl = `${environment.apiUrlDividendos}/api/dividendos`;
 
   constructor(private http: HttpClient) { }
 

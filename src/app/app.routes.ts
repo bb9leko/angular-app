@@ -1,5 +1,5 @@
 import { Routes } from '@angular/router';
-import { HomeComponent } from './components/home/home.component';
+import { HomeComponent } from './pages/home/home.component';
 import { BuscaAtivoComponent } from './pages/busca-ativo/busca-ativo.component';
 import { InvestimentoFormComponent } from './pages/investimento-form/investimento-form.component';
 import { BuscaAtivoConsolidadoComponent } from './pages/busca-ativo-consolidado/busca-ativo-consolidado.component';

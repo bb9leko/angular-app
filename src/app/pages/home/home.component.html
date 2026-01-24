@@ -1,0 +1,151 @@
+<div class="home-container">
+  <!-- Hero Section -->
+  <section class="hero-section">
+    <div class="hero-content">
+      <h1 class="hero-title">Gestão de Investimentos</h1>
+      <p class="hero-subtitle">Organize e monitore seus investimentos de forma inteligente</p>
+      <div class="hero-actions">
+        <button class="btn-primary" routerLink="/investimento-form">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+            <path d="M12 5v14M5 12h14" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+          </svg>
+          Nova Transação
+        </button>
+        <button class="btn-secondary" routerLink="/upload-dividendos">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" stroke="currentColor" stroke-width="2"/>
+            <path d="M14 2v6h6" stroke="currentColor" stroke-width="2"/>
+            <path d="M12 18v-6" stroke="currentColor" stroke-width="2"/>
+            <path d="M9 15l3 3 3-3" stroke="currentColor" stroke-width="2"/>
+          </svg>
+          Upload Dividendos
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <!-- Dashboard Cards -->
+  <section class="dashboard-section">
+    <div class="section-header">
+      <h2>Visão Geral</h2>
+      <p>Resumo dos seus investimentos</p>
+    </div>
+    
+    <div class="cards-grid">
+      <div class="dashboard-card">
+        <div class="card-icon portfolio">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+            <circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="2"/>
+            <path d="M12 6v6l4 2" stroke="currentColor" stroke-width="2"/>
+          </svg>
+        </div>
+        <div class="card-content">
+          <h3>Portfolio</h3>
+          <p class="card-value">R$ 0,00</p>
+          <p class="card-description">Valor total investido</p>
+        </div>
+      </div>
+
+      <div class="dashboard-card">
+        <div class="card-icon returns">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+            <path d="M7 17L17 7" stroke="currentColor" stroke-width="2"/>
+            <path d="M7 7h10v10" stroke="currentColor" stroke-width="2"/>
+          </svg>
+        </div>
+        <div class="card-content">
+          <h3>Rentabilidade</h3>
+          <p class="card-value positive">+0,00%</p>
+          <p class="card-description">Rendimento total</p>
+        </div>
+      </div>
+
+      <div class="dashboard-card">
+        <div class="card-icon dividends">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+            <path d="M12 2L2 7v10c0 5.55 3.84 9.74 9 11 5.16-1.26 9-5.45 9-11V7l-10-5z" stroke="currentColor" stroke-width="2"/>
+          </svg>
+        </div>
+        <div class="card-content">
+          <h3>Dividendos</h3>
+          <p class="card-value">R$ 0,00</p>
+          <p class="card-description">Recebidos este mês</p>
+        </div>
+      </div>
+
+      <div class="dashboard-card">
+        <div class="card-icon assets">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+            <rect x="3" y="4" width="18" height="18" rx="2" ry="2" stroke="currentColor" stroke-width="2"/>
+            <line x1="16" y1="2" x2="16" y2="6" stroke="currentColor" stroke-width="2"/>
+            <line x1="8" y1="2" x2="8" y2="6" stroke="currentColor" stroke-width="2"/>
+            <line x1="3" y1="10" x2="21" y2="10" stroke="currentColor" stroke-width="2"/>
+          </svg>
+        </div>
+        <div class="card-content">
+          <h3>Ativos</h3>
+          <p class="card-value">0</p>
+          <p class="card-description">Total de posições</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Quick Actions -->
+  <section class="quick-actions-section">
+    <div class="section-header">
+      <h2>Ações Rápidas</h2>
+      <p>Acesse rapidamente as principais funcionalidades</p>
+    </div>
+    
+    <div class="actions-grid">
+      <a routerLink="/busca-ativo" class="action-card">
+        <div class="action-icon search">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+            <circle cx="11" cy="11" r="8" stroke="currentColor" stroke-width="2"/>
+            <path d="m21 21-4.35-4.35" stroke="currentColor" stroke-width="2"/>
+          </svg>
+        </div>
+        <h3>Buscar Ativos</h3>
+        <p>Consulte suas transações por ativo</p>
+      </a>
+
+      <a routerLink="/busca-ativo-consolidado" class="action-card">
+        <div class="action-icon consolidate">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+            <rect x="3" y="3" width="7" height="7" stroke="currentColor" stroke-width="2"/>
+            <rect x="14" y="3" width="7" height="7" stroke="currentColor" stroke-width="2"/>
+            <rect x="3" y="14" width="7" height="7" stroke="currentColor" stroke-width="2"/>
+            <rect x="14" y="14" width="7" height="7" stroke="currentColor" stroke-width="2"/>
+          </svg>
+        </div>
+        <h3>Visão Consolidada</h3>
+        <p>Veja o resumo consolidado dos ativos</p>
+      </a>
+
+      <a routerLink="/investimento-form" class="action-card">
+        <div class="action-icon add">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+            <rect x="3" y="3" width="18" height="18" rx="2" stroke="currentColor" stroke-width="2"/>
+            <path d="M9 12h6" stroke="currentColor" stroke-width="2"/>
+            <path d="M12 9v6" stroke="currentColor" stroke-width="2"/>
+          </svg>
+        </div>
+        <h3>Nova Transação</h3>
+        <p>Registre compras e vendas de ativos</p>
+      </a>
+
+      <a routerLink="/upload-dividendos" class="action-card">
+        <div class="action-icon upload">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" stroke="currentColor" stroke-width="2"/>
+            <path d="M7 10l5-5 5 5" stroke="currentColor" stroke-width="2"/>
+            <path d="M12 15V5" stroke="currentColor" stroke-width="2"/>
+          </svg>
+        </div>
+        <h3>Upload Dividendos</h3>
+        <p>Importe seus dividendos recebidos</p>
+      </a>
+    </div>
+  </section>
+</div>
