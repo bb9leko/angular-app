@@ -80,44 +80,85 @@ export class EditarTransacaoComponent {
       this.form.patchValue(transacao); // Preenche os valores no form já existente
       this.transacao = transacao;
     });
-  }
+    // Atualiza valorTotal quando quantidade ou valorUnitario mudam
+  this.form.get('quantidade')?.valueChanges.subscribe(() => this.atualizarValores());
+  this.form.get('valorUnitario')?.valueChanges.subscribe(() => this.atualizarValores());
 
-  editarTransacao() {
-    this.service.editarTransacao(this.transacao).subscribe(() => {
-      this.router.navigate(['/investimento-form'])
-    })
+  // Atualiza valorTotalComCustosEDespesas quando qualquer campo de custo/despesa muda
+  [
+    'valorTotal',
+    'valorCorretagem',
+    'valorTaxasEmolumentos',
+    'valorTaxaLiquidacao',
+    'valorImpostos',
+    'outrosValoresCobrados'
+  ].forEach(campo => {
+    this.form.get(campo)?.valueChanges.subscribe(() => this.atualizarValores());
+  });
+}
 
-  }
+// ...existing code...
+atualizarValores() {
+  const quantidade = Number(this.form.get('quantidade')?.value) || 0;
+  const valorUnitario = Number(this.form.get('valorUnitario')?.value) || 0;
+  const valorTotal = parseFloat((quantidade * valorUnitario).toFixed(2));
 
-  cancelar() {
-    this.router.navigate(['/busca-ativo'])
-  }
+  this.form.get('valorTotal')?.setValue(valorTotal, { emitEvent: false });
 
-  transformarTicketParaCaixaAlta(event: any) {
+  const valorCorretagem = Number(this.form.get('valorCorretagem')?.value) || 0;
+  const valorTaxasEmolumentos = Number(this.form.get('valorTaxasEmolumentos')?.value) || 0;
+  const valorTaxaLiquidacao = Number(this.form.get('valorTaxaLiquidacao')?.value) || 0;
+  const valorImpostos = Number(this.form.get('valorImpostos')?.value) || 0;
+  const outrosValoresCobrados = Number(this.form.get('outrosValoresCobrados')?.value) || 0;
+
+  const valorTotalComCustosEDespesas = parseFloat((
+    valorTotal +
+    valorCorretagem +
+    valorTaxasEmolumentos +
+    valorTaxaLiquidacao +
+    valorImpostos +
+    outrosValoresCobrados
+  ).toFixed(2));
+
+  this.form.get('valorTotalComCustosEDespesas')?.setValue(valorTotalComCustosEDespesas, { emitEvent: false });
+}
+
+
+editarTransacao() {
+  this.service.editarTransacao(this.transacao).subscribe(() => {
+    this.router.navigate(['/investimento-form'])
+  })
+}
+
+cancelar() {
+  this.router.navigate(['/busca-ativo'])
+}
+
+transformarTicketParaCaixaAlta(event: any) {
   const valor = event.target.value.toUpperCase();
   this.form.get('ticket')?.setValue(valor, { emitEvent: false });
-  }
+}
 
-  onClick() {
-    if (this.form.valid) {
-      console.log('Dados do formulário:', this.form.getRawValue());
-      this.service.editarTransacao(this.form.getRawValue()).subscribe({
-        next: (res) => {
-          // sucesso, faça algo com a resposta
-          console.log('Transação enviada com sucesso!', res);
-          alert('Transação enviada com sucesso!');
-          this.form.reset(); 
-        },
-        error: (err) => {
-          // erro, trate o erro
-          console.error('Erro ao enviar transação:', err);
-          alert('Erro ao enviar transação. Por favor, tente novamente.');
-        },
-        complete: () => {
-          console.log('Formulário Completado');
-        }        
-      });
-    } else {
+onClick() {
+  if (this.form.valid) {
+    console.log('Dados do formulário:', this.form.getRawValue());
+    this.service.editarTransacao(this.form.getRawValue()).subscribe({
+      next: (res) => {
+        // sucesso, faça algo com a resposta
+        console.log('Transação enviada com sucesso!', res);
+        alert('Transação enviada com sucesso!');
+        this.form.reset(); 
+      },
+      error: (err) => {
+        // erro, trate o erro
+        console.error('Erro ao enviar transação:', err);
+        alert('Erro ao enviar transação. Por favor, tente novamente.');
+      },
+      complete: () => {
+        console.log('Formulário Completado');
+      }        
+    });
+  } else {
       console.log('Formulário inválido');
       alert('Por favor, preencha todos os campos obrigatórios.');
     }

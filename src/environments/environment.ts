@@ -1,8 +1,8 @@
 export const environment = {
 
-    apiUrl: 'https://api-consumer-quarkus.onrender.com',
+    apiUrl: 'http://localhost:8083',
     apiUrlDividendos: 'http://localhost:8081',
-    apiUrlTransacoes: 'https://api-consumer-quarkus.onrender.com/transacao/buscarPorTicket',
+    apiUrlTransacoes: 'http://localhost:8083/transacao/buscarPorTicket',
     apiUrlTransacoesConsolidado: 'http://localhost:8081/ativos/consolidados'
 
 };
