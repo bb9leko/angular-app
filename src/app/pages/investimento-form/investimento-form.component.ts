@@ -72,7 +72,12 @@ export class InvestimentoFormComponent {
     const liquidacao = Number(this.form.get('valorTaxaLiquidacao')!.value) || 0;
     const impostos = Number(this.form.get('valorImpostos')!.value) || 0;
     const outros = Number(this.form.get('outrosValoresCobrados')!.value) || 0;
-    const totalFinal = total + corretagem + taxas + liquidacao + impostos + outros;
+    let totalFinal = 0;
+    if (this.form.get('compraOUVenda')!.value === 'VENDA') {
+      totalFinal = total - corretagem - taxas - liquidacao - impostos - outros;
+    } else {
+      totalFinal = total + corretagem + taxas + liquidacao + impostos + outros;
+    }    
     this.form.get('valorTotalComCustosEDespesas')!.setValue(totalFinal ? parseFloat(totalFinal.toFixed(2)) : 0, { emitEvent: false });
   }
 

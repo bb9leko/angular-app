@@ -22,10 +22,8 @@ export class BuscaAtivoComponent implements OnDestroy {
   subscription!: Subscription
   ativo!: Ativo
 
-
   constructor(private service: TransacaoService) {}
   
-  //Não está sendo usado, apenas carrega o endpoint no console 
   ngOnInit(): void {
     this.service.listar().subscribe((listaTransacoes) => {
       console.log('Lista de transações:', listaTransacoes);

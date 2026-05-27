@@ -25,13 +25,6 @@ export interface AtivosResultado {
     totalItems: number
 }
 
-/*export interface AtivoConsolidado extends Ativo {
-  quantidadeTotal: number;
-  valorTotalConsolidado: number;
-  precoMedio: number;
-  numeroTransacoes: number;
-}*/
-
 export interface AtivoConsolidado {
   classificacaoAtivo: string;
   corretora: string;
